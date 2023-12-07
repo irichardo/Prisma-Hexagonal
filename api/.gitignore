@@ -1,0 +1,43 @@
+# Node.js
+node_modules/
+
+# Logs y archivos generados automáticamente
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Directorios generados
+pids/
+logs/
+logs/*
+results/
+build/
+dist/
+.coverage/
+.nyc_output/
+coverage/
+.nyc
+lib-cov/
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.seed
+*.status
+*.db
+
+# Otras carpetas generadas por herramientas
+bower_components/
+jspm_packages/
+typings/
+.idea/
+.vscode/
+.project
+.settings/
+.cache
+.DS_Store
+.env
+Thumbs.db

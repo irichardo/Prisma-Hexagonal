@@ -1,0 +1,21 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": "standard-with-typescript",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "tsConfigRootDir": "."
+    },
+    "rules": {
+            "@typescript-eslint/no-misused-promises": [
+              "error",
+              {
+                "checksVoidReturn": false
+              }
+            ]
+          
+    }
+}
