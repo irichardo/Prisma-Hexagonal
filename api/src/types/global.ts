@@ -9,6 +9,11 @@ interface User {
   role: Role
 }
 
+interface IMessageRequest {
+  senderId: number,
+  receiverId: number
+}
+
 interface ILogin {
   email: string
   password: string
@@ -16,5 +21,6 @@ interface ILogin {
 
 export type {
   User,
-  ILogin
+  ILogin,
+  IMessageRequest
 }

@@ -1,5 +1,6 @@
 import { type Request, type Response, Router } from 'express'
 import { prisma } from '../../infrastructure/adapters/Input/prisma/adapter.prisma'
+import { getAllMessageControllerBeetweenUsers } from '../../infrastructure/adapters/Output/controllers/message.controller'
 
 const router = Router()
 
@@ -15,9 +16,9 @@ router.post('/', async (req: Request, res: Response) => {
     })
 
     if (getConversation === null) {
-    /**
-      *@const relationConversationBetween2Users: Create Conversation between 2 users if the conversation doesn't exists.
-      */
+      /**
+        *@const relationConversationBetween2Users: Create Conversation between 2 users if the conversation doesn't exists.
+        */
       const relationConversationBetween2Users = await prisma.conversation.create({
         data: {
           name: 'Default',
@@ -75,29 +76,6 @@ router.post('/', async (req: Request, res: Response) => {
   }
 })
 
-router.get('/', async (req: Request, res: Response) => {
-  try {
-    // const messages = await prisma.user.findMany({
-    //   include: {
-    //     conversations: { select: { participants: { select: { id: true } }, id: true, name: true } }
-    //   }
-    // })
-    // const users = await prisma.user.findMany({
-    //   include: {
-    // conversations
-    // senderMessages: true,
-    // receivedMessages: true
-    // }
-    // })
-    const conversation = await prisma.conversation.findFirst({
-      where: { AND: [{ participants: { some: { id: 1 } } }, { participants: { some: { id: 3 } } }] }, include: { messages: true }
-    })
-    console.log(conversation)
-    res.status(200).send(conversation)
-  } catch (err: any) {
-    console.error(err.message)
-    res.sendStatus(500)
-  }
-})
+router.get('/', getAllMessageControllerBeetweenUsers)
 
 export default router
