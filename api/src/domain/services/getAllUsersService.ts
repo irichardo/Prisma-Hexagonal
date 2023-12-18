@@ -7,7 +7,7 @@ import type { IGetAllUsers } from '../types/repositoryTypes'
  * @returns An Object with the count of users and all users with his friends
  * @throws Error if the users not exists.
  * @example
- * const { countUsers, allUsers }
+ * @const { countUsers, allUsers }
  */
 
 type UserWithoutPassword = Omit<User, 'password' | 'userName'>
@@ -20,7 +20,6 @@ export const getAllUsersService = async (): Promise<IGetAllUsers> => {
       friends: true,
       friendsOf: true,
       conversations: true
-    // receivedMessages: true, senderMessages: true, friends: { select: { id: true, name: true, email: true, role: true } } }
     }
   })
   const users = getUsers.map((users: User & { friends: UserWithoutPassword[], conversations: Conversation[] }) => {

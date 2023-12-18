@@ -1,14 +1,19 @@
 import { Request, Response } from "express";
-import { findConversationById } from "../../../services/find_conversation_by_id";
+import MessageRepository from "../../../../../domain/repositories/createMessageRepository";
 
-export const sendMessageController = (req: Request, res: Response) => {
+const messageRepository = new MessageRepository()
+
+export const sendMessageController = async (req: Request, res: Response) => {
   const { senderId, receiverId, content } = req.body
   try {
-    const conversation = findConversationById({ senderId, receiverId })
-    if (conversation === null || conversation === undefined) throw new Error("Conversation not exists")
-
+    if (typeof senderId !== 'number' || typeof receiverId !== 'number') throw new Error('Invalid Id')
+    if (senderId === undefined || senderId === null) throw new Error('Try again later')
+    if (receiverId === undefined || receiverId === null) throw new Error('Access Denied')
+    await messageRepository.sendMessage({ senderId, receiverId, content })
+    res.sendStatus(200)
   }
   catch (error) {
-
+    console.error(error)
+    res.sendStatus(203)
   }
 }

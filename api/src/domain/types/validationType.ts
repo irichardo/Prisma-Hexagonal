@@ -6,12 +6,5 @@ enum Datatype {
   USERNAME = 'USERNAME'
 }
 
-type UserWithoutSensibleData = Omit<User, 'userName' | 'password'>
 
-interface IUserRepository {
-  getUserById: (id: number) => Promise<UserWithoutSensibleData>
-  createUser: (userData: User) => Promise<{ id: number }>
-  getAllUsers: () => void
-}
-
-export { Datatype, type IUserRepository, type UserWithoutSensibleData }
+export { Datatype }
