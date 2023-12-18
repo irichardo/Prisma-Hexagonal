@@ -1,6 +1,6 @@
 import { type Request, type Response, Router } from 'express'
 import { prisma } from '../../infrastructure/adapters/Input/prisma/adapter.prisma'
-import { getAllMessageControllerBeetweenUsers } from '../../infrastructure/adapters/Output/controllers/message.controller'
+import { findConversationByIdController } from '../../infrastructure/adapters/Output/controllers/message.controller'
 
 const router = Router()
 
@@ -76,6 +76,6 @@ router.post('/', async (req: Request, res: Response) => {
   }
 })
 
-router.get('/', getAllMessageControllerBeetweenUsers)
+router.get('/', findConversationByIdController)
 
 export default router

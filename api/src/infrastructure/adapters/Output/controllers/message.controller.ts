@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 import { findConversationById } from "../../services/find_conversation_by_id"
 
-export const getAllMessageControllerBeetweenUsers = async (req: Request, res: Response) => {
+export const findConversationByIdController = async (req: Request, res: Response) => {
+
   const { senderId, receiverId } = req.body
   try {
     if (senderId === null || senderId === undefined || typeof senderId !== 'number') throw new Error("Datos no validos")
