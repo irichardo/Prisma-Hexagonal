@@ -1,6 +1,6 @@
-import { getConversationById } from "."
 import { createMessage } from "../../infrastructure/adapters/services/addMessageToConversation"
 import { createConversation } from "../../infrastructure/adapters/services/createConversation"
+import { findConversationById } from "../../infrastructure/adapters/services/find_conversation_by_id"
 import type { IsendMessageStructure } from "../types/index.types"
 /**
  * @param (number) SenderId - user Id that gimme the posibily of verify his existence.
@@ -9,7 +9,7 @@ import type { IsendMessageStructure } from "../types/index.types"
  */
 
 export const sendMessageService = async ({ senderId, receiverId, content }: IsendMessageStructure): Promise<void> => {
-  const conversation = await getConversationById({ senderId, receiverId })
+  const conversation = await findConversationById({ senderId, receiverId })
   if (conversation !== null) await createMessage({ senderId, content, conversationId: conversation.id })
   //Check if it's necessary put that else in this line
   else {

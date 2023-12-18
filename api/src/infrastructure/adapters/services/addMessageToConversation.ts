@@ -4,7 +4,7 @@ import { Message } from "@prisma/client";
 type TCreateMessage = Pick<Message, 'senderId' | 'content' | 'conversationId'>
 
 export const createMessage = async ({ senderId, content, conversationId }: TCreateMessage): Promise<void> => {
-  prisma.message.create({
+  await prisma.message.create({
     data: {
       content,
       senderId,

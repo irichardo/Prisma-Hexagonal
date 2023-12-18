@@ -31,5 +31,6 @@ export type {
   IUserRepository,
   IMessageRepository,
   IGetAllUsers,
-  IsendMessageStructure
+  IsendMessageStructure,
+  UserWithoutSensibleData
 }

@@ -9,6 +9,6 @@ export default class MessageRepository implements IMessageRepository {
     return conversation
   }
   async sendMessage(usersIdAndMessage: IsendMessageStructure): Promise<void> {
-    sendMessageService(usersIdAndMessage)
+    await sendMessageService(usersIdAndMessage)
   }
 }
