@@ -1,0 +1,45 @@
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id                Int                @id @default(autoincrement())
+    userName          String             @unique
+    email             String             @unique
+    name              String
+    password          String
+    friends           User[]             @relation("Friends")
+    friendsOf         User[]             @relation("Friends")
+    role              Role               @default(USER)
+    conversations     Conversation[]    @relation("Participants")
+}
+
+model Message {
+    id             Int          @id @default(autoincrement())
+    content        String
+    senderId       Int
+    conversation   Conversation @relation("conversation", fields: [conversationId], references: [id])
+    conversationId Int
+
+    @@index([senderId])
+    @@index([conversationId])
+}
+
+model Conversation {
+    id                Int                 @id @default(autoincrement())
+    name              String
+    messages          Message[]           @relation("conversation")
+    participants      User[]              @relation("Participants")
+    @@index([id])
+}
+
+enum Role {
+    USER
+    ADMIN
+}
