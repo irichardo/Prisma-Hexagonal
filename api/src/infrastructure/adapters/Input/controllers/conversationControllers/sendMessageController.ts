@@ -12,8 +12,8 @@ export const sendMessageController = async (req: Request, res: Response) => {
     await messageRepository.sendMessage({ senderId, receiverId, content })
     res.sendStatus(200)
   }
-  catch (error) {
-    console.error(error)
+  catch (error: any) {
+    console.error(error.message)
     res.sendStatus(203)
   }
 }

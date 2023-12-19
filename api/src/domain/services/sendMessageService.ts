@@ -2,6 +2,7 @@ import { createMessage } from "../../infrastructure/adapters/services/addMessage
 import { createConversation } from "../../infrastructure/adapters/services/createConversation"
 import { findConversationById } from "../../infrastructure/adapters/services/find_conversation_by_id"
 import type { IsendMessageStructure } from "../types/index.types"
+import { verifyUsersExists } from "../utils/verifyIfUserExists"
 /**
  * @param (number) SenderId - user Id that gimme the posibily of verify his existence.
  * @param (number) receiverId - same That SenderId.
@@ -9,6 +10,7 @@ import type { IsendMessageStructure } from "../types/index.types"
  */
 
 export const sendMessageService = async ({ senderId, receiverId, content }: IsendMessageStructure): Promise<void> => {
+  await verifyUsersExists({ senderId, receiverId })
   const conversation = await findConversationById({ senderId, receiverId })
   if (conversation !== null) await createMessage({ senderId, content, conversationId: conversation.id })
   //Check if it's necessary put that else in this line
