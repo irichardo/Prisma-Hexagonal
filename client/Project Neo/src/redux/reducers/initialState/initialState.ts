@@ -10,8 +10,9 @@ const userInfoInitialState:userInterface={
     email:"",
     role:null,
     friends:[],
-    receivedMessages:[],
-    senderMessages:[]
+    conversations:[],
+    // receivedMessages:[],
+    // senderMessages:[]
 }
 
 const initialState:TInitialState = {

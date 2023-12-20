@@ -1,7 +1,6 @@
-import { ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store/store";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function DashBoardLayout() {
   const { isAuth, loading } = useSelector((state: RootState) => state.auth);

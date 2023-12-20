@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "./redux/store/store";
 import { useEffect, useRef } from "react";
 import { autoLogin } from "./redux/actions/authActions";
-import LandingPage from "./pages/landing";
 import Middleware from "./middleware/appMiddleware";
 import cookies from "js-cookie";
 

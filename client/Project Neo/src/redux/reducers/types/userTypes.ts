@@ -19,8 +19,9 @@ interface userInterface{
     email:string,
     role: role | null
     friends: Pick<userInterface, "id" | "name" | "role">[]
-    receivedMessages: any[],
-    senderMessages: any[]
+    conversations:any[]
+    // receivedMessages: any[],
+    // senderMessages: any[]
 }
 
 interface IUserFetch {

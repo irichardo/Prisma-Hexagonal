@@ -13,7 +13,11 @@ export default function MessageSection() {
   //   type: string;
   // }
   const { userInfo } = useSelector((state: RootState) => state.auth);
-  const navigate = useNavigate();
+  const { conversations } = useSelector(
+    (state: RootState) => state.auth.userInfo
+  );
+  console.log(conversations)
+  // const navigate = useNavigate();
   const userId = 54321;
   const messages = [
     { user: "Richard", type: "Friend", message: "Hola!" },
@@ -36,9 +40,12 @@ export default function MessageSection() {
       },
       withCredentials: true,
     };
-    axios.get("http://localhost:3000/api/v1/users/logout", config).then(() => {
-      localStorage.removeItem("_iL");
-    }).then(()=>window.location.reload());
+    axios
+      .get("http://localhost:3000/api/v1/users/logout", config)
+      .then(() => {
+        localStorage.removeItem("_iL");
+      })
+      .then(() => window.location.reload());
   };
 
   return (

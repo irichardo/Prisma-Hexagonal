@@ -21,11 +21,10 @@ export const findUserByEmail = async (email: string): Promise<TLogin & { passwor
     where: { email },
     include: {
       friends: { select: { id: true, name: true, role: true } },
-      conversations: true
-      // receivedMessages: true,
-      // senderMessages: true
+      conversations: { include: { participants: { select: { id: true, name: true } } } }
     }
   })
   if (user === null || user === undefined) throw new Error('User not found, use other Email')
+  console.log(user.conversations[0])
   return user
 }

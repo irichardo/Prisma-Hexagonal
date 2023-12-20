@@ -20,7 +20,8 @@ export const userLogin = createAsyncThunk(
         { email, password },
         config
       );
-      localStorage.setItem('_iL','1')
+      console.log(data.user)
+      // localStorage.setItem('_iL','1')
       return data;
     } catch (error) {
       console.log(error)
@@ -46,6 +47,7 @@ export const autoLogin = createAsyncThunk(
     if(!refresh_token) return rejectWithValue("Token not exists")
     console.log(refresh_token)
     const { data }:{data:IUserFetch} = await axios.post(`${URL}/api/v1/users/refresh_token`,{refresh_token},config)
+    console.log(data)
     return data;
     }
     catch(error){
