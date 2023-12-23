@@ -1,23 +1,16 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store/store";
-import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IParticipants } from "../redux/reducers/types/userTypes";
 
 export default function MessageSection() {
-  //   {
-  //   user,
-  //   type,
-  // }: {
-  //   user: string;
-  //   type: string;
-  // }
   const { userInfo } = useSelector((state: RootState) => state.auth);
   const { conversations } = useSelector(
     (state: RootState) => state.auth.userInfo
   );
-  console.log(conversations)
-  // const navigate = useNavigate();
+
+  console.log(conversations);
+
   const userId = 54321;
   const messages = [
     { user: "Richard", type: "Friend", message: "Hola!" },
@@ -62,14 +55,12 @@ export default function MessageSection() {
         {messages.map((message) => (
           <li className={`w-full h-[20vh]`}>
             <div
-              className={`w-full h-full flex items-center ${
-                message.id !== userId ? "justify-start" : "justify-end"
-              }`}
+              className={`w-full h-full flex items-center ${message.id !== userId ? "justify-start" : "justify-end"
+                }`}
             >
               <span
-                className={`rounded-lg m-2 ${
-                  message.id !== userId ? "bg-blue-600" : "bg-blue-400"
-                } p-2 items-center flex justify-center`}
+                className={`rounded-lg m-2 ${message.id !== userId ? "bg-blue-600" : "bg-blue-400"
+                  } p-2 items-center flex justify-center`}
               >
                 {message.message}
               </span>
