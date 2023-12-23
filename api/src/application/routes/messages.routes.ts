@@ -4,7 +4,7 @@ import { sendMessageController } from '../../infrastructure/adapters/Input/contr
 
 const router = Router()
 
-router.post('/', sendMessageController)
-router.get('/', findConversationByIdController)
+router.post('/send', sendMessageController)
+router.post('/find', findConversationByIdController)
 
 export default router
