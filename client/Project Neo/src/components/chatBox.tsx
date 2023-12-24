@@ -1,15 +1,11 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store/store";
 import axios from "axios";
-import { IParticipants } from "../redux/reducers/types/userTypes";
+import { ErrorInfo, useEffect, useState } from "react";
 
 export default function MessageSection() {
-  const { userInfo } = useSelector((state: RootState) => state.auth);
-  const { conversations } = useSelector(
-    (state: RootState) => state.auth.userInfo
-  );
-
-  console.log(conversations);
+  const [messageList, setConversation] = useState();
+  const [loading, setLoading] = useState(false);
 
   const userId = 54321;
   const messages = [
@@ -41,6 +37,29 @@ export default function MessageSection() {
       .then(() => window.location.reload());
   };
 
+  const conversation = async () => {
+    try {
+      const conversationMessages = await axios.post(
+        "http://localhost:3000/api/v1/messages/find",
+        {
+          senderId: 6,
+          receiverId: 7,
+        }
+      );
+      setConversation(conversationMessages.data);
+    } catch (error: unknown) {
+      console.log(error)
+    }
+    finally{
+     setLoading(true) 
+    }
+    // console.log(conversationMessages.data)
+  };
+
+  useEffect(() => {
+    conversation();
+  }, []);
+
   return (
     <section className="w-screen h-screen">
       <button
@@ -55,12 +74,14 @@ export default function MessageSection() {
         {messages.map((message) => (
           <li className={`w-full h-[20vh]`}>
             <div
-              className={`w-full h-full flex items-center ${message.id !== userId ? "justify-start" : "justify-end"
-                }`}
+              className={`w-full h-full flex items-center ${
+                message.id !== userId ? "justify-start" : "justify-end"
+              }`}
             >
               <span
-                className={`rounded-lg m-2 ${message.id !== userId ? "bg-blue-600" : "bg-blue-400"
-                  } p-2 items-center flex justify-center`}
+                className={`rounded-lg m-2 ${
+                  message.id !== userId ? "bg-blue-600" : "bg-blue-400"
+                } p-2 items-center flex justify-center`}
               >
                 {message.message}
               </span>

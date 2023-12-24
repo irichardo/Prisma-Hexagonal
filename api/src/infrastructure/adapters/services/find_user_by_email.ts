@@ -25,6 +25,6 @@ export const findUserByEmail = async (email: string): Promise<TLogin & { passwor
     }
   })
   if (user === null || user === undefined) throw new Error('User not found, use other Email')
-  // console.log(user.conversations[0])
+  // console.log(user.conversations)
   return user
 }
