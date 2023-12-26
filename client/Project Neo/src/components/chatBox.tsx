@@ -3,7 +3,14 @@ import { RootState } from "../redux/store/store";
 import axios from "axios";
 import { ErrorInfo, useEffect, useState } from "react";
 
-export default function MessageSection() {
+interface props {
+  id: string
+}
+
+export default function MessageSection(props: any) {
+
+  console.log(props.params)
+
   const [messageList, setConversation] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -50,8 +57,8 @@ export default function MessageSection() {
     } catch (error: unknown) {
       console.log(error)
     }
-    finally{
-     setLoading(true) 
+    finally {
+      setLoading(true)
     }
     // console.log(conversationMessages.data)
   };
@@ -74,14 +81,12 @@ export default function MessageSection() {
         {messages.map((message) => (
           <li className={`w-full h-[20vh]`}>
             <div
-              className={`w-full h-full flex items-center ${
-                message.id !== userId ? "justify-start" : "justify-end"
-              }`}
+              className={`w-full h-full flex items-center ${message.id !== userId ? "justify-start" : "justify-end"
+                }`}
             >
               <span
-                className={`rounded-lg m-2 ${
-                  message.id !== userId ? "bg-blue-600" : "bg-blue-400"
-                } p-2 items-center flex justify-center`}
+                className={`rounded-lg m-2 ${message.id !== userId ? "bg-blue-600" : "bg-blue-400"
+                  } p-2 items-center flex justify-center`}
               >
                 {message.message}
               </span>

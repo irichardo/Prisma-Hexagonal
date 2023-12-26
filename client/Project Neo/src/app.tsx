@@ -17,7 +17,7 @@ export default function App() {
   const { isAuth, userInfo, loading } = useSelector((state: RootState) => state.auth);
   const isAutoLoginDone = useRef(false);
   const isMounted = useRef(true);
-  const isLogged = localStorage.getItem("_iL")??undefined
+  const isLogged = localStorage.getItem("_iL") ?? undefined
   useEffect(() => {
     if (
       cookies.get("refresh_token") &&
@@ -54,8 +54,12 @@ export default function App() {
     },
     {
       path: "/login",
-      element:isAuth || isLogged == '1'?<Navigate to={'/'}/>:<Login />,
+      element: isAuth || isLogged == '1' ? <Navigate to={'/'} /> : <Login />,
     },
+    {
+      path: "/messages/:id",
+      element: <MessageSection />,
+    }
     // {
     //   path: "/landing",
     //   element:isAuth ? <Navigate to={"/"} /> : <LandingPage />,
