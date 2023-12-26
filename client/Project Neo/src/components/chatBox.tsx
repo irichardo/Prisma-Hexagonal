@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store/store";
 import axios from "axios";
 import { ErrorInfo, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 interface props {
   id: string
@@ -15,20 +14,22 @@ export default function MessageSection() {
     console.log(messageList)
   const [loading, setLoading] = useState(false);
 
+  console.log(messageList.messages)
+
   const userId = 54321;
-  const messages = [
-    { user: "Richard", type: "Friend", message: "Hola!" },
-    { user: "Arinalgona", type: "Friend", message: "¿Como estas?", id: 12345 },
-    {
-      user: "Richard",
-      type: "Friend",
-      message: "¿Me picas la colita?",
-      id: 54321,
-    },
-    { user: "Arinalgona", type: "Friend", message: "Por supuesto!", id: 12345 },
-    { user: "Richard", type: "Friend", message: "Saca la colita!", id: 54321 },
-    { user: "Richard", type: "Friend", message: "Saca la colita!", id: 54321 },
-  ];
+  // const messages = [
+  //   { user: "Richard", type: "Friend", message: "Hola!" },
+  //   { user: "Arinalgona", type: "Friend", message: "¿Como estas?", id: 12345 },
+  //   {
+  //     user: "Richard",
+  //     type: "Friend",
+  //     message: "¿Me picas la colita?",
+  //     id: 54321,
+  //   },
+  //   { user: "Arinalgona", type: "Friend", message: "Por supuesto!", id: 12345 },
+  //   { user: "Richard", type: "Friend", message: "Saca la colita!", id: 54321 },
+  //   { user: "Richard", type: "Friend", message: "Saca la colita!", id: 54321 },
+  // ];
 
   const logout = async () => {
     const config = {
@@ -80,21 +81,21 @@ export default function MessageSection() {
         Arianalgona
       </p>
       <ul className="w-full h-4/6 flex flex-col overflow-y-auto border-2">
-        {messages.map((message) => (
+        {messageList ? messageList.messages.map((message) => (
           <li className={`w-full h-[20vh]`}>
-            <div
-              className={`w-full h-full flex items-center ${message.id !== userId ? "justify-start" : "justify-end"
-                }`}
-            >
-              <span
-                className={`rounded-lg m-2 ${message.id !== userId ? "bg-blue-600" : "bg-blue-400"
-                  } p-2 items-center flex justify-center`}
-              >
-                {message.message}
-              </span>
-            </div>
+            {/* <div */}
+            {/*   className={`w-full h-full flex items-center ${message.id !== userId ? "justify-start" : "justify-end" */}
+            {/*     }`} */}
+            {/* > */}
+            {/* <span */}
+            {/*   className={`rounded-lg m-2 ${message.id !== userId ? "bg-blue-600" : "bg-blue-400" */}
+            {/*     } p-2 items-center flex justify-center`} */}
+            {/* > */}
+            {/* {messageList.messages} */}
+            {/* </span> */}
+            {/* </div> */}
           </li>
-        ))}
+        )) : (<div>Loading</div>)}
       </ul>
       <input
         placeholder="Please write a message..."
