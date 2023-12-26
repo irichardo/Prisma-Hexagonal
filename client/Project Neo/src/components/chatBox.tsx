@@ -2,16 +2,17 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store/store";
 import axios from "axios";
 import { ErrorInfo, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 interface props {
   id: string
 }
 
-export default function MessageSection(props: any) {
-
-  console.log(props.params)
-
-  const [messageList, setConversation] = useState();
+export default function MessageSection() {
+  const params = useParams()
+  const { id } = useSelector((state:RootState)=> state.auth.userInfo)
+  const [messageList, setConversation] = useState([]);
+    console.log(messageList)
   const [loading, setLoading] = useState(false);
 
   const userId = 54321;
@@ -49,11 +50,12 @@ export default function MessageSection(props: any) {
       const conversationMessages = await axios.post(
         "http://localhost:3000/api/v1/messages/find",
         {
-          senderId: 6,
-          receiverId: 7,
+          senderId: id,
+          receiverId: Number(params.id),
         }
       );
       setConversation(conversationMessages.data);
+      
     } catch (error: unknown) {
       console.log(error)
     }
