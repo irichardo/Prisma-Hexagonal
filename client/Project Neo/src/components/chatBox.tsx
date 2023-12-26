@@ -15,16 +15,13 @@ interface IMessage {
   converationId: number,
 }
 
+
 export default function MessageSection() {
-  const params = useParams()
-  const { id } = useSelector((state:RootState)=> state.auth.userInfo)
-  const [messageList, setConversation] = useState([]);
-    console.log(messageList)
-  const [loading, setLoading] = useState(false);
-
-  console.log(messageList.messages)
-
-  const userId = 54321;
+  const dispatch = useDispatch<AppDispatch>();
+  const params = useParams();
+  const { id, friends } = useSelector((state: RootState) => state.auth.userInfo);
+  const [messageList, setConversation] = useState();
+  // dispatch(findUser(6))
   // const messages = [
   //   { user: "Richard", type: "Friend", message: "Hola!" },
   //   { user: "Arinalgona", type: "Friend", message: "¿Como estas?", id: 12345 },
@@ -78,7 +75,6 @@ export default function MessageSection() {
 
   useEffect(() => {
     conversation();
-    dispatch(findUser({ id: 6 }))
   }, []);
 
   return (
