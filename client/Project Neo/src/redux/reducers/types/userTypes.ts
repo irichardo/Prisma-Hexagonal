@@ -2,6 +2,7 @@ type TInitialState = {
   loading: boolean
   userInfo: userInterface
   isAuth: boolean
+  friends: any | null
   userToken: string | undefined
   refreshToken: string | undefined
   error: any
