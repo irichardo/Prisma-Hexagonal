@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import { prisma } from '../prisma/adapter.prisma'
+import { prisma } from '../../../database/adapter.prisma'
 
 export const addFriendController = async (req: Request, res: Response): Promise<void> => {
   const { userId, friendId }: { userId: number, friendId: number } = req.body

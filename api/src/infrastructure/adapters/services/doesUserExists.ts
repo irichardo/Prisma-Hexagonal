@@ -1,5 +1,5 @@
 import type { User } from '@prisma/client'
-import { prisma } from '../Input/prisma/adapter.prisma'
+import { prisma } from '../../database/adapter.prisma'
 
 export const doesUserExists = async (id: number): Promise<User> => {
   const existId = await prisma.user.findUnique({ where: { id } })

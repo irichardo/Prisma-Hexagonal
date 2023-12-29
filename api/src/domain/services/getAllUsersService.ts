@@ -1,5 +1,5 @@
 import type { User, Conversation } from '@prisma/client'
-import { prisma } from '../../infrastructure/adapters/Input/prisma/adapter.prisma'
+import { prisma } from '../../infrastructure/database/adapter.prisma'
 import type { IGetAllUsers } from '../types/repositoryTypes'
 
 /**

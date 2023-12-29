@@ -1,5 +1,5 @@
 import { type TLogin } from '../../types/findUserByEmailTypes'
-import { prisma } from '../Input/prisma/adapter.prisma'
+import { prisma } from '../../database/adapter.prisma'
 
 /**
  * @param email

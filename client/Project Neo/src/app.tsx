@@ -11,6 +11,7 @@ import { useEffect, useRef } from "react";
 import { autoLogin } from "./redux/actions/authActions";
 import Middleware from "./middleware/appMiddleware";
 import cookies from "js-cookie";
+import LandingPage from "./pages/landing";
 
 export default function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -48,7 +49,7 @@ export default function App() {
       children: [
         {
           path: "/",
-          element: <MessageSection />,
+          element: <LandingPage />,
         },
       ],
     },

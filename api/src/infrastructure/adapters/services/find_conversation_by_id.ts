@@ -1,5 +1,5 @@
 import { type Conversation } from '@prisma/client'
-import { prisma } from '../../adapters/Input/prisma/adapter.prisma'
+import { prisma } from '../../database/adapter.prisma'
 import { type IMessageRequest } from '../../../types/global'
 
 export const findConversationById = async ({ senderId, receiverId }: IMessageRequest): Promise<Conversation | null> => {

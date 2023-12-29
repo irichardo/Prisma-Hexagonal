@@ -1,14 +1,16 @@
-import { Conversation } from "@prisma/client";
-import { IMessageRequest } from "../../types/global";
+import { type Message, type Conversation } from '@prisma/client'
+import { type IMessageRequest } from '../../types/global'
 import { getConversationById, sendMessageService } from '../services/index'
-import { IMessageRepository, IsendMessageStructure } from "../types/index.types";
+import { type IMessageRepository, type IsendMessageStructure } from '../types/index.types'
 
 export default class MessageRepository implements IMessageRepository {
-  async getConversation(usersID: IMessageRequest): Promise<Conversation> {
+  async getConversation (usersID: IMessageRequest): Promise<Conversation> {
     const conversation = getConversationById(usersID)
-    return conversation
+    return await conversation
   }
-  async sendMessage(usersIdAndMessage: IsendMessageStructure): Promise<void> {
-    await sendMessageService(usersIdAndMessage)
+
+  async sendMessage (usersIdAndMessage: IsendMessageStructure): Promise<Message> {
+    const sendMessageSocket = await sendMessageService(usersIdAndMessage)
+    return sendMessageSocket
   }
 }

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./initialState/initialState";
 import { autoLogin, userLogin } from "../actions/authActions";
+import { findUserController } from "../actions/userController";
 
 const authSlice = createSlice({
   name: 'auth',
@@ -35,12 +36,16 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuth = true;
         state.userInfo = payload!.user;
+        state.friends = payload!.user.friends;
         state.userToken = payload!.refreshToken;
         state.error = null;
       }),
       builder.addCase(autoLogin.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+      }),
+      builder.addCase(findUserController.fulfilled, (state, { payload }) => {
+        state.selectedFriend = payload;
       })
   }
 })

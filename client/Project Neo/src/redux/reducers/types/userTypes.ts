@@ -3,6 +3,7 @@ type TInitialState = {
   userInfo: userInterface
   isAuth: boolean
   friends: any | null
+  selectedFriend: any | null
   userToken: string | undefined
   refreshToken: string | undefined
   error: any
@@ -24,7 +25,7 @@ export interface IConversation {
   participants: IParticipants[]
 }
 
-interface userInterface {
+ interface userInterface {
   id: number | null,
   userName: string,
   name: string,

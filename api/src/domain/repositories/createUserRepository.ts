@@ -2,7 +2,7 @@ import type { IUserRepository, IGetAllUsers } from '../types/index.types'
 import { getAllUsersService, passwordEncrypt, passwordDecrypt } from '../services/index'
 import { doesEmailExists, doesUserExists, doesUserNameExists, findUserByEmail } from '../../infrastructure/adapters/services/index'
 import type { User } from '../../types/global'
-import { prisma } from '../../infrastructure/adapters/Input/prisma/adapter.prisma'
+import { prisma } from '../../infrastructure/database/adapter.prisma'
 import { type UserWithoutSensibleData } from '../types/repositoryTypes'
 import { type TLogin } from '../../infrastructure/types/findUserByEmailTypes'
 

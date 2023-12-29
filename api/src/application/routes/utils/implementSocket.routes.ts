@@ -2,8 +2,10 @@ import type { Express } from 'express'
 import { Server } from 'socket.io'
 import { createServer } from 'http'
 import { type RouteVersion, type RouteStructure } from '../../types/types'
+import MessageRepository from '../../../domain/repositories/createMessageRepository'
 
 const { PORT } = process.env
+const messageRepository = new MessageRepository()
 
 const implementSocketIoClient = (server: Express, route: RouteStructure[], version: RouteVersion): void => {
   const serverListen = createServer(server)
@@ -14,19 +16,23 @@ const implementSocketIoClient = (server: Express, route: RouteStructure[], versi
       credentials: true
     }
   })
-  io.on('connection', (socket) => {
-    console.log('Socket connected')
-    socket.on('sendMessage', async (message) => {
-      console.log(message)
-      io.emit('message', message)
-    })
-    socket.on('sendMatrix', async (matrix) => {
-      io.emit('matrix', matrix)
+
+  io.on('connection', (socket: any) => {
+    console.log('a user connected')
+    socket.on('join', (message: any) => {
+      messageRepository.sendMessage(message)
+        .then((result) => {
+          console.log('message sent', result)
+          io.emit('message', result)
+        })
+        .catch((error) => { console.log(error) })
+      // socket.emit('message', message)
     })
     socket.on('disconnect', () => {
-      console.log('Socket disconnected')
+      console.log('user disconnected')
     })
   })
+
   route.forEach(({ path, router }) => {
     console.log(`/api/${version}${path}`)
     server.use(`/api/${version}${path}`, router)

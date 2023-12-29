@@ -1,6 +1,6 @@
-import { IMessageRequest } from "../../../types/global";
-import { Conversation } from "@prisma/client";
-import { prisma } from "../Input/prisma/adapter.prisma";
+import { type IMessageRequest } from '../../../types/global'
+import { type Conversation } from '@prisma/client'
+import { prisma } from '../../database/adapter.prisma'
 
 export const createConversation = async ({ senderId, receiverId }: IMessageRequest): Promise<Pick<Conversation, 'id'>> => {
   const conversation = await prisma.conversation.create({

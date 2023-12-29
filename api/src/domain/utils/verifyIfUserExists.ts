@@ -1,4 +1,4 @@
-import { prisma } from "../../infrastructure/adapters/Input/prisma/adapter.prisma";
+import { prisma } from "../../infrastructure/database/adapter.prisma";
 import { IMessageRequest } from "../../types/global";
 
 /**

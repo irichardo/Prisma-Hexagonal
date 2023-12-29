@@ -20,6 +20,7 @@ const initialState: TInitialState = {
   userToken: '',
   userInfo: userInfoInitialState,
   friends: [],
+  selectedFriend:[],
   loading: false,
   isAuth: false,
   error: null
